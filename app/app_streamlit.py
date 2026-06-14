@@ -5,6 +5,19 @@ import os
 
 import streamlit as st
 
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+
+st.write("Current working directory:", os.getcwd())
+st.write("BASE_DIR:", BASE_DIR)
+st.write("Files in BASE_DIR:", os.listdir(BASE_DIR))
+st.write("Model exists:", (BASE_DIR / "sentiment_model.pkl").exists())
+
+
+
+
+
 warnings.filterwarnings("ignore")
 
 
@@ -37,12 +50,14 @@ def preprocess(text: str, stop_words: set[str]) -> str:
     return text
 
 
+BASE_DIR = Path(__file__).parent
+
 @st.cache_resource(show_spinner=False)
-def load_artifacts(pkl_path: str = "sentiment_model.pkl"):
-    if not os.path.exists(pkl_path):
-        st.error(
-            "Missing `sentiment_model.pkl`. Run `python train_and_dump.py --train-path train.txt --out-path sentiment_model.pkl` once."
-        )
+def load_artifacts():
+    pkl_path = BASE_DIR / "sentiment_model.pkl"
+
+    if not pkl_path.exists():
+        st.error(f"Missing model file: {pkl_path}")
         st.stop()
 
     with open(pkl_path, "rb") as f:
