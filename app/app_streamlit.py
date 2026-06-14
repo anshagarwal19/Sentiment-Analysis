@@ -7,12 +7,12 @@ import streamlit as st
 
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
+# BASE_DIR = Path(__file__).parent
 
-st.write("Current working directory:", os.getcwd())
-st.write("BASE_DIR:", BASE_DIR)
-st.write("Files in BASE_DIR:", os.listdir(BASE_DIR))
-st.write("Model exists:", (BASE_DIR / "sentiment_model.pkl").exists())
+# st.write("Current working directory:", os.getcwd())
+# st.write("BASE_DIR:", BASE_DIR)
+# st.write("Files in BASE_DIR:", os.listdir(BASE_DIR))
+# st.write("Model exists:", (BASE_DIR / "sentiment_model.pkl").exists())
 
 
 
@@ -83,7 +83,7 @@ def predict_emotion(text: str) -> str:
 st.set_page_config(page_title="Sentiment Emotion Predictor", layout="centered")
 
 st.title("Emotion Predictor (TF-IDF + Logistic Regression)")
-st.caption("Predicts emotions")
+st.caption("Predicts emotions using ML")
 
 user_text = st.text_area("Enter your text:", height=160, placeholder="Type something like: 'I feel really angry and rejected' ...")
 
